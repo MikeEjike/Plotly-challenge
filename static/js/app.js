@@ -7,7 +7,7 @@ d3.json(url).then((data) => {
         y: data.samples.map(item => item.sample_values),
         type: 'bar'
     };
-
+    console.log(trace)
     // let layout = {
     
     // };
