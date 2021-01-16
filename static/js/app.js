@@ -17,17 +17,48 @@ function getChart(sample) {
       .slice(0, 10)
       .map((otuID) => `OTU ${otuID}`)
       .reverse();
-    let trace =
-      {
-        y: yValue,
-        x: sampleValues.slice(0, 10).reverse(),
-        text: otuLabels.slice(0, 10).reverse(),
-        type: "bar",
-        orientation: "h",
-      };
+    let trace = {
+      y: yValue,
+      x: sampleValues.slice(0, 10).reverse(),
+      text: otuLabels.slice(0, 10).reverse(),
+      type: "bar",
+      orientation: "h",
+    };
+    let barLayout ={
+        title: "Top 10 OTUs",
+        xaxis:{title: "OTU IDs"},
+        yaxis:{title: "Sample Values"},
+    } 
+    let barData = [trace];
 
-    let barData = [trace]
-    Plotly.newPlot("bar", barData);
+    Plotly.newPlot("bar", barData, barLayout);
+
+    let bubbleLayout = {
+    //   title: "Bacteria Cultures Per Sample",
+    //   margin: { t: 0 },
+    //   hovermode: "closest",
+      xaxis: { title: "OTU ID" },
+      yaxis: { title: "Sample Values" },
+
+    //   margin: { t: 30 },
+    };
+
+    let bubbleData = [
+      {
+        x: otuIds,
+        y: sampleValues,
+        text: otuLabels,
+        mode: "markers",
+        marker: {
+          size: sampleValues,
+          color: otuIds,
+          colorscale: "Earth",
+        },
+      },
+    ];
+
+    Plotly.newPlot("bubble", bubbleData, bubbleLayout);
+
 
     // for (let index = 0; index < xValue.length; index++) {
     //     const element = xValue[index];
@@ -104,7 +135,7 @@ function init() {
 function optionChanged(newSample) {
   // Fetch new data each time a new sample is selected
   getChart(newSample);
-//   buildMetadata(newSample);
+  //   buildMetadata(newSample);
 }
 
 init();
