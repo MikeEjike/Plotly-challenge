@@ -32,8 +32,6 @@ Use Plotly.js to build interactive charts for the dashboard
 
 3. Display the sample metadata, i.e., an individual's demographic information.
 
-4. Display each key-value pair from the metadata JSON object somewhere on the page.
-
 ![hw](Images/hw03.png)
 
-5. Update all of the plots any time that a new sample is selected.
+- Should update all of the plots any time that a new sample is selected.
